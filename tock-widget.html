@@ -15,11 +15,13 @@
     </script>
     <script>
         function sendHeight() {
+            console.log('Sending height:', document.body.scrollHeight);
             parent.postMessage(document.body.scrollHeight, '*');
         }
 
         window.addEventListener('load', sendHeight);
         window.addEventListener('resize', sendHeight);
+        new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true });
     </script>
 </head>
 <body>
