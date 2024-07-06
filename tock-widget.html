@@ -13,6 +13,14 @@
 
         tock('init', 'coq-au-vin-portland');
     </script>
+    <script>
+        function sendHeight() {
+            parent.postMessage(document.body.scrollHeight, '*');
+        }
+
+        window.addEventListener('load', sendHeight);
+        window.addEventListener('resize', sendHeight);
+    </script>
 </head>
 <body>
     <div id="Tock_widget_container" data-tock-display-mode="Inline" data-tock-color-mode="Blue" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles" data-tock-offering="430987"></div>
