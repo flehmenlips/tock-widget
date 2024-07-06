@@ -15,7 +15,6 @@
     </script>
     <script>
         function sendHeight() {
-            console.log('Sending height:', document.body.scrollHeight);
             parent.postMessage(document.body.scrollHeight, '*');
         }
 
