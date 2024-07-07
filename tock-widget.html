@@ -14,13 +14,29 @@
         tock('init', 'coq-au-vin-portland');
     </script>
     <script>
-        function sendHeight() {
-            parent.postMessage(document.body.scrollHeight, '*');
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
         }
 
+        function sendHeight() {
+            const targetOrigin = 'https://flehmenlips.github.io'; // Ensure this matches the origin of the parent frame
+            parent.postMessage(document.body.scrollHeight, targetOrigin);
+        }
+
+        const debouncedSendHeight = debounce(sendHeight, 200); // Adjust the debounce time as needed
+
         window.addEventListener('load', sendHeight);
-        window.addEventListener('resize', sendHeight);
-        new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true });
+        window.addEventListener('resize', debouncedSendHeight);
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const observer = new MutationObserver(debouncedSendHeight);
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
     </script>
 </head>
 <body>
