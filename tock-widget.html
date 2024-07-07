@@ -12,6 +12,20 @@
         window,document,'script','https://www.exploretock.com/tock.js');
 
         tock('init', 'coq-au-vin-portland');
+
+        // Dynamically load Stripe script
+        (function() {
+            var stripeScript = document.createElement('script');
+            stripeScript.src = 'https://js.stripe.com/v3';
+            stripeScript.async = true;
+            stripeScript.onload = function() {
+                console.log('Stripe script loaded successfully');
+            };
+            stripeScript.onerror = function() {
+                console.log('Error loading Stripe script');
+            };
+            document.head.appendChild(stripeScript);
+        })();
     </script>
     <script>
         function debounce(func, wait) {
@@ -24,7 +38,7 @@
         }
 
         function sendHeight() {
-            const targetOrigin = 'https://flehmenlips.github.io'; // Ensure this matches the origin of the parent frame
+            const targetOrigin = 'https://www.seabreeze.farm'; // Ensure this matches the origin of the parent frame
             parent.postMessage(document.body.scrollHeight, targetOrigin);
         }
 
