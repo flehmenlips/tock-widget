@@ -12,45 +12,6 @@
         window,document,'script','https://www.exploretock.com/tock.js');
 
         tock('init', 'coq-au-vin-portland');
-
-        // Dynamically load Stripe script
-        (function() {
-            var stripeScript = document.createElement('script');
-            stripeScript.src = 'https://js.stripe.com/v3';
-            stripeScript.async = true;
-            stripeScript.onload = function() {
-                console.log('Stripe script loaded successfully');
-            };
-            stripeScript.onerror = function() {
-                console.log('Error loading Stripe script');
-            };
-            document.head.appendChild(stripeScript);
-        })();
-    </script>
-    <script>
-        function debounce(func, wait) {
-            let timeout;
-            return function() {
-                const context = this, args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-
-        function sendHeight() {
-            const targetOrigin = 'https://www.seabreeze.farm'; // Ensure this matches the origin of the parent frame
-            parent.postMessage(document.body.scrollHeight, targetOrigin);
-        }
-
-        const debouncedSendHeight = debounce(sendHeight, 200); // Adjust the debounce time as needed
-
-        window.addEventListener('load', sendHeight);
-        window.addEventListener('resize', debouncedSendHeight);
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const observer = new MutationObserver(debouncedSendHeight);
-            observer.observe(document.body, { childList: true, subtree: true });
-        });
     </script>
 </head>
 <body>
